@@ -7,6 +7,7 @@ import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
 import DatePicker from 'primevue/datepicker';
 import { computed, ref, watch } from 'vue'
+import Select from 'primevue/select'
 
 const ENDPOINT = 'series'
 const props = defineProps({
@@ -26,6 +27,15 @@ const dialogVisible = computed({
     }
 })
 
+
+const clasificaciones = [
+    { label: 'A: Todo público', value: 'A: Todo público' },
+    { label: 'B: Para niños', value: 'B: Para niños' },
+    { label: 'B12: Público mayor a 12 años', value: 'B12: Público mayor a 12 años' },
+    { label: 'B15: Público mayor a 15 años', value: 'B15: Público mayor a 15 años' },
+    { label: 'C: Público mayor a 18 años', value: 'C: Público mayor a 18 años' }
+]
+
 const serie = ref<Serie>({ ...props.serie })
 watch(
     () => props.serie,
@@ -39,10 +49,10 @@ async function handleSave() {
         const body = {
             titulo: serie.value.titulo,
             sinopsis: serie.value.sinopsis,
+            tipoClasificacion: serie.value.tipoClasificacion,
             director: serie.value.director,
             temporadas: serie.value.temporadas,
             fechaEstreno: serie.value.fechaEstreno,
-
         }
         if (props.modoEdicion) {
             await http.patch(`${ENDPOINT}/${serie.value.id}`, body)
@@ -68,6 +78,11 @@ async function handleSave() {
             <div class="flex items-center gap-4 mb-4">
                 <label for="sinopsis" class="font-semibold w-24">Sinopsis</label>
                 <InputText id="sinopsis" v-model="serie.sinopsis" class="flex-auto" autocomplete="off" />
+            </div>
+            <div class="flex items-center gap-4 mb-4">
+                <label for="tipoClasificaciones" class="font-semibold w-24">Clasificaciones</label>
+                <Select id="tipoClasificaciones" v-model="serie.tipoClasificacion" :options="clasificaciones"
+                    optionLabel="label" optionValue="value" class="flex-auto" />
             </div>
             <div class="flex items-center gap-4 mb-4">
                 <label for="director" class="font-semibold w-24">Director</label>

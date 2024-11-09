@@ -11,6 +11,9 @@ export class Serie {
   @Column('varchar', { length: 5000 })
   sinopsis: string;
 
+  @Column('varchar', { name: 'tipo_clasificacion', length: 500  })
+  tipoClasificacion:string
+
   @Column('varchar', { length: 100 })
   director: string;
 

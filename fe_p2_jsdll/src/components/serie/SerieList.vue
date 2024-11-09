@@ -46,6 +46,7 @@ defineExpose({ obtenerLista })
           <th>Nro.</th>
           <th>Título</th>
           <th>Sinopsis</th>
+          <th>Clasificación</th>
           <th>Director</th>
           <th>Temporadas</th>
           <th>Fecha de Estreno</th>
@@ -56,6 +57,7 @@ defineExpose({ obtenerLista })
           <td>{{ index + 1 }}</td>
           <td>{{ serie.titulo }}</td>
           <td>{{ serie.sinopsis }}</td>
+          <td>{{ serie.tipoClasificacion }}</td>
           <td>{{ serie.director }}</td>
           <td>{{ serie.temporadas }}</td>
           <td>{{ serie.fechaEstreno }}</td>

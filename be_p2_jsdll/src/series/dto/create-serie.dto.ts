@@ -24,6 +24,12 @@ export class CreateSerieDto {
   readonly sinopsis: string;
 
   @ApiProperty()
+  @IsNotEmpty({ message: 'El campo sinopsis no debe ser vacío' })
+  @IsString({ message: 'El campo sinopsis debe ser de tipo cadena' })
+  @MaxLength(500, { message: 'El campo sinopsis no debe ser mayor a 500 caracteres' })
+  readonly tipoClasificacion: string;
+
+  @ApiProperty()
   @IsNotEmpty({ message: 'El campo director no debe ser vacío' })
   @IsString({ message: 'El campo director debe ser de tipo cadena' })
   @MaxLength(100, { message: 'El campo director no debe ser mayor a 100 caracteres' })
